@@ -61,6 +61,10 @@ describe('Test Order', () => {
       // Find and select the 5 mile option, like a real user would.
       screen.getByRole('option', { name: '5 miles' })
     );
+    await waitFor(() => {
+      expect(screen.getAllByText('$5.00'))
+        .toHaveLength(1);
+});
     //Assert: replace the return true.
     await waitFor(() => {
       return true;
