@@ -90,9 +90,16 @@ describe('Test Home', () => {
     expect(screen.queryByTestId(/category-item/i)).not.toBeInTheDocument();
   });
 
-  //Copied "Test Render"
-  test('Test Integration Render', async () => {
-    //Deleted the mock calls.  There is no Arrange for this test since this will access the shared servers.
+  test('Test Home renders categories from the API response', async () => {
+    jest.spyOn(axios, 'get').mockResolvedValue({
+      data: {
+        status: 'success',
+        data: [
+          { id: 1, name: 'Handhelds', description: 'Handheld food' },
+          { id: 2, name: 'Appeteasers', description: 'Appetizers' },
+        ],
+      },
+    });
     //Act: Call the Home page
     render(<Home />);
     //Assert: Check the values in the rendered Home page.
